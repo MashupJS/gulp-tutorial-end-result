@@ -26,6 +26,7 @@ var gulp = require('gulp')
     , tslint                = require('gulp-tslint')
     , tsstylish             = require('gulp-tslint-stylish')
     , sass                  = require('gulp-sass')
+    , watch                 = require('gulp-watch')
 
 ;
 
@@ -196,6 +197,20 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('dist/./'));
 });
 
+// ---------------------------------------------------------------
+// Watch specific tasks.  This is to support the use of newer.
+// ---------------------------------------------------------------
+gulp.task('watch:annotate', function () {
+    return gulp.src(['src/index.controller.js', 'src/core/**/*.js', 'src/apps/**/*.js', '!src/core/lib/**/*', '!/**/*.min.js'], { base: 'src/./' })
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+      .pipe(newer('src/./'))
+      .pipe(ngAnnotate())
+      .pipe(gulp.dest('src/./'));
+});
+
+
 
 // ----------------------------------------------------------------
 // Default Task
@@ -203,6 +218,64 @@ gulp.task('sass', function () {
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
                 ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'
-                    , 'grunt-merge-json:menu', 'jshint', 'tscompile', 'tslint', 'sass'],
-                ['uglifyalljs', 'minifycss']);
+                    , 'grunt-merge-json:menu', 'jshint', 'tscompile', 'tslint', 'sass']
+                , ['uglifyalljs', 'minifycss']
+                ,'watch');
+});
+
+
+
+gulp.task('watch', function () {
+
+    // ---------------------------------------------------------------
+    // Watching JS files
+    // ---------------------------------------------------------------
+    // Copy all files except *.js files.
+    gulp.watch(['src/**/*', '!src/**/*.js', '!bower_components/**.*'], function () { runSequence('copy'); });
+
+    // Annotates and copies *.js files
+    gulp.watch(['src/**/*.js',
+        '!src/core/config/route.config.js', '!src/apps/**/route.config.js',
+        '!bower_components/**/*.js'], function () { runSequence('watch:annotate', 'copy'); });
+
+    // routeConfig file changes.
+    gulp.watch(['src/core/config/route.config.js', 'src/apps/**/route.config.js'], function () { runSequence('routeconfig'); });
+
+    // Uglify JS files
+    gulp.watch(['dist/**/*.js', '!dist/**/*.min.js', '!dist/core/lib/**/*', '!dist/core/common/**/*'], function () { runSequence('uglifyalljs'); });
+
+
+    // ---------------------------------------------------------------
+    // Watching Bower components
+    // ---------------------------------------------------------------        
+    gulp.watch(['bower_components/**/*.js'], function () { runSequence('libs'); });
+    // TODO: Add other bower component types like css, scss and images
+
+
+    // ---------------------------------------------------------------
+    // Watching css and scss files
+    // ---------------------------------------------------------------
+    gulp.watch(['dist/**/*.css', '!dist/**/*.min.css', '!dist/core/lib/**/*'], function () { runSequence('minifycss'); });
+    gulp.watch(['dist/**/*.scss', '!dist/core/lib/**/*'], function () { runSequence('sass'); });
+
+    // ---------------------------------------------------------------
+    // Watching TypeScript files
+    // ---------------------------------------------------------------
+    gulp.watch(['dist/**/*.ts', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'], function () { runSequence('tscompile'); });
+
+    // ---------------------------------------------------------------
+    // Watch - Execute linters
+    // ---------------------------------------------------------------
+    gulp.watch(['dist/**/*.ts', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'], function () { runSequence('tslint'); });
+    //gulp.watch(['dist/**/*.js', '!dist/core/lib/**/*.*', '!dist/**/*.min.js', '!dist/core/css/**/*.*'], function() { runSequence('jshint'); });
+
+
+    gulp.watch(['dist/**/*.js', '!dist/core/lib/**/*.*', '!dist/**/*.min.js', '!dist/core/css/**/*.*'], ['jshint']);
+
+    // ---------------------------------------------------------------
+    // Watching image files
+    // ---------------------------------------------------------------
+    // unable to get this watch to ever notice a file changed.  This will be handled on the initial build.
+    //gulp.watch(['dist/**/*.{png,jpg,gif,ico}', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'], function() { runSequence('minifyimage'); });
+
 });

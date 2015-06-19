@@ -30,6 +30,7 @@
     "gulp-tslint-stylish": "^1.0.1",
     "gulp-typescript": "^2.7.7",
     "gulp-uglify": "^1.2.0",
+    "gulp-watch": "^4.2.4",
     "imagemin-pngquant": "^4.1.0",
     "jshint-stylish": "^2.0.0",
     "run-sequence": "^1.1.1"
