@@ -16,6 +16,8 @@
     "gulp-concat": "^2.5.2",
     "gulp-grunt": "^0.5.2",
     "gulp-imagemin": "^2.2.1",
+    "gulp-jshint": "^1.11.0",
+    "gulp-jshint-html-reporter": "^0.1.2",
     "gulp-minify-css": "^1.1.6",
     "gulp-minify-html": "^1.0.3",
     "gulp-newer": "^0.5.1",
@@ -25,6 +27,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "imagemin-pngquant": "^4.1.0",
+    "jshint-stylish": "^2.0.0",
     "run-sequence": "^1.1.1"
   }
 }

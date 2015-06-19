@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gulpfile.js" />
+    <Content Include="jshint-output.html" />
     <Content Include="package.json" />
     <Content Include="src\core\css\bootstrap\paper\bootstrap.min.css" />
     <Content Include="src\core\lib\angularJS\1.3.8\angular-animate.min.js.map" />
@@ -117,6 +118,7 @@
     <Content Include="src\core\css\bootstrap\paper\_bootswatch.scss" />
     <Content Include="src\core\css\bootstrap\paper\_variables.scss" />
     <Content Include="Gruntfile.js" />
+    <Content Include=".jshintrc" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

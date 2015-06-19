@@ -19,6 +19,10 @@ var gulp = require('gulp')
     , minifyhtml            = require('gulp-minify-html')
     , imagemin              = require('gulp-imagemin')
     , pngquant              = require('imagemin-pngquant')
+    , jshint                = require('gulp-jshint')
+    , stylish               = require('jshint-stylish')
+    , jshinthtmlreporter    = require('gulp-jshint-html-reporter')
+
 ;
 
 gulp.task('annotate', function () {
@@ -137,6 +141,20 @@ require('gulp-grunt')(gulp, {
 });
 // -------------------------------------------------
 
+gulp.task('jshint', function () {
+    //gulp.task('jshint', ['copy', 'tscompile'], function () {
+    return gulp.src(['./dist/**/*.js', '!dist/core/lib/**/*.*', '!**/*.min.js', '!dist/core/css/**/*.*'])
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+      .pipe(jshint('.jshintrc'))
+      .pipe(jshint.reporter(stylish))
+      .pipe(jshint.reporter('gulp-jshint-html-reporter', { filename: 'jshint-output.html' }))
+    ;
+});
+
+
+
 
 // ----------------------------------------------------------------
 // Default Task
@@ -144,6 +162,6 @@ require('gulp-grunt')(gulp, {
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
                 ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'
-                    , 'grunt-merge-json:menu'],
+                    , 'grunt-merge-json:menu', 'jshint'],
                 ['uglifyalljs', 'minifycss']);
 });
