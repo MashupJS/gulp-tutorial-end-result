@@ -1,4 +1,4 @@
-var onError = function(err) {
+var onError = function (err) {
     console.log(err);
 };
 
@@ -127,12 +127,23 @@ gulp.task('minifyimage', function () {
     .pipe(gulp.dest('dist/./'));
 });
 
+// -------------------------------------------------
+// Grunt configuration
+require('gulp-grunt')(gulp, {
+    // These are the default options but included here for readability.
+    base: null,
+    prefix: 'grunt-',
+    verbose: false
+});
+// -------------------------------------------------
+
 
 // ----------------------------------------------------------------
 // Default Task
 // ----------------------------------------------------------------
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
-                ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'],
+                ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'
+                    , 'grunt-merge-json:menu'],
                 ['uglifyalljs', 'minifycss']);
 });

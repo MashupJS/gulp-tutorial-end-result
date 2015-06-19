@@ -116,6 +116,7 @@
     <Content Include="src\core\css\bootstrap\default\_variables.scss" />
     <Content Include="src\core\css\bootstrap\paper\_bootswatch.scss" />
     <Content Include="src\core\css\bootstrap\paper\_variables.scss" />
+    <Content Include="Gruntfile.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
