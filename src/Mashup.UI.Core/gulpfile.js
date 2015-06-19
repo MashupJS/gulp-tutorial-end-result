@@ -1,8 +1,6 @@
-
 var onError = function(err) {
     console.log(err);
 };
-
 
 var gulp = require('gulp')
     , uglify                = require('gulp-uglify')
@@ -14,6 +12,13 @@ var gulp = require('gulp')
     , clean                 = require('gulp-clean')
     , newer                 = require('gulp-newer')
     , concat                = require('gulp-concat')
+    , rename                = require('gulp-rename')
+    , uglify                = require('gulp-uglify')
+    , sourcemaps            = require('gulp-sourcemaps')
+    , minifycss             = require('gulp-minify-css')
+    , minifyhtml            = require('gulp-minify-html')
+    , imagemin              = require('gulp-imagemin')
+    , pngquant              = require('imagemin-pngquant')
 ;
 
 gulp.task('annotate', function () {
@@ -69,10 +74,65 @@ gulp.task('libs', function () {
       .pipe(gulp.dest('dist/core/lib/'));
 });
 
+gulp.task('uglifyalljs', function () {
+    //gulp.task('uglifyalljs', ['copy', 'coreservices', 'routeconfig', 'tscompile'], function () {
+    return gulp.src(['dist/**/*.js', '!/**/*.min.js', '!dist/core/lib/**/*', '!dist/core/common/**/*'], { base: 'dist/./' })
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+     .pipe(sourcemaps.init())
+    //  .pipe(newer('dist/./'))
+     .pipe(uglify())
+     .pipe(rename({
+         extname: '.min.js'
+     }))
+     .pipe(sourcemaps.write('./'))
+     .pipe(gulp.dest('dist/./'));
+});
+
+gulp.task('minifycss', function () {
+    return gulp.src(['dist/**/*.css', '!dist/**/*.min.css', '!dist/core/lib/**/*'], { base: 'dist/./' })
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+     .pipe(sourcemaps.init())
+     .pipe(minifycss())
+     .pipe(rename({
+         extname: '.min.css'
+     }))
+     .pipe(sourcemaps.write('./'))
+     .pipe(gulp.dest('dist/./'));
+});
+
+gulp.task('minifyhtml', function () {
+    return gulp.src(['dist/**/*.html', '!/**/*.min.html', '!dist/core/lib/**/*'], { base: 'dist/./' })
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+     .pipe(sourcemaps.init())
+     .pipe(minifyhtml())
+     .pipe(rename({
+         extname: '.min.html'
+     }))
+     .pipe(sourcemaps.write('./'))
+     .pipe(gulp.dest('dist/./'));
+});
+
+gulp.task('minifyimage', function () {
+    return gulp.src(['dist/**/*.{png,jpg,gif,ico}', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'])
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+    .pipe(imagemin({ progressive: true, optimizationLevel: 7, use: [pngquant()] }))
+    .pipe(gulp.dest('dist/./'));
+});
+
+
 // ----------------------------------------------------------------
 // Default Task
 // ----------------------------------------------------------------
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
-                ['coreservices', 'routeconfig', 'libs']);
+                ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'],
+                ['uglifyalljs', 'minifycss']);
 });
