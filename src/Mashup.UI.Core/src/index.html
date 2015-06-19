@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" ng-app="mashupApp">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="MashupJS">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">-->
+    <!--<link rel="icon" href="favicon.ico">-->
+    <link rel="shortcut icon" href="core/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="core/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            padding-top: 57px;
+            padding-bottom: 20px;
+        }
+
+        .btn_menu {
+            height: 50px;
+        }
+    </style>
+    <!-- Normalize, below, is described here: -->
+    <!-- http://getbootstrap.com/css/#overview-normalize and http://necolas.github.io/normalize.css/ -->
+    <link href="core/css/Normalize-3.0.1.min.css" rel="stylesheet" />
+    <link href="core/lib/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="core/css/bootstrap/yeti/bootstrap.min.css" rel="stylesheet" />
+    <!--<link href="css/bootstrap/cerulean/bootstrap.min.css" rel="stylesheet" />-->
+    <!-- Use for custom or overriding css.  This must be the last css loaded to work. -->
+    <link href="core/css/main.min.css" rel="stylesheet" />
+
+    <script src="core/lib/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+</head>
+<!--<body ng-controller="mashupController">-->
+<body ng-controller="indexController">
+    <div>
+        <div class="" style="width: 100%; height: 60px; background-color: black; top: 0; position: absolute;">
+
+            <div class="" style="padding: 5px 5px 5px 1px; float: left;">
+                <a ng-click="open()" class="btn_menu btn btn-default btn-lg" role="button">
+                    <i class="fa fa-bars fa-fw"></i> Apps
+                </a>
+            </div>
+
+            <!--<div class="" style="padding: 5px 5px 5px 1px; float: left;">-->
+            <div class="pull-left" style="padding: 5px 50px 0 0; width: 105px;">
+                <a href="#/mashup/about" class="btn_menu btn btn-default btn-lg" role="button"><i class="fa fa-shield"></i> About</a>
+            </div>
+
+
+            <div class="pull-right" style="padding: 5px 0 0 0;">
+                <div style="color:grey">{{batteryStatus}}</div>
+            </div>
+
+        </div>
+
+        <!--<div ng-repeat="alert in alerts" class="alert {{type}}">-->
+        <div style="padding: 5px;" ng-repeat="alert in alerts" class="{{alert.type}}">
+            <button class="btn-default btn btn-default btn-sm" style="height: 30px;" ng-click="alert.close()">close</button>
+            <span data-ng-bind-html="alert.msg"></span>
+        </div>
+
+
+        <!-- MAIN CONTENT AND INJECTED VIEWS -->
+        <div id="main">
+
+            <!-- angular templating -->
+            <!-- this is where content will be injected -->
+            <div ng-view></div>
+
+        </div>
+
+        <hr>
+        <footer>
+            <p class="text-muted">&copy; Copy Right 2014</p>
+        </footer>
+
+    </div> <!-- /container -->
+    <!--<script>window.jQuery || document.write('<script src="lib/jquery/jquery-1.11.0.min.js"><\/script>')</script>-->
+
+    <script src="core/lib/jquery/jquery-2.1.1.min.js"></script>
+    <!-- I commented out the bootstrap, below, thinking I didn't need it.  Then things stopped working. -->
+
+    <script src="core/lib/bootstrap/bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>
+    <script src="core/lib/angularJS/1.3.8/angular.min.js"></script>
+    <script src="core/lib/angularJS/1.3.8/angular-route.min.js"></script>
+    <script src="core/lib/angularJS/1.3.8/angular-sanitize.min.js"></script>
+    <script src="core/lib/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="core/lib/ynd-db/1.1.1/ydn.db-is-sql-e-cur-qry-text-dev.js"></script>
+    <script src="core/lib/lodash/2.4.1/lodash.min.js"></script>
+    <!--<script src="lib/ocLazyLoad/ocLazyLoad.js"></script>-->
+    <script src="core/lib/ocLazyLoad/0.5.2.20150120/ocLazyLoad.min.js"></script>
+
+    <!--Application Controllers-->
+    <script src="core/app.min.js"></script>
+    <script src="index.controller.min.js"></script>
+    <script src="apps/mashup/menu.controller.min.js"></script>
+
+    <!--Application Router Files-->
+    <script src="route.config.min.js"></script>
+
+    <!--Used by the router to authenticate so needs loaded now, now on demand.-->
+    <!--This can be replace with your own AuthN code-->
+    <!--<script src="apps/mashup/~appServices/data.service.min.js"></script>-->
+    <!-- Services -->
+    <script src="core.services.min.js"></script>
+
+
+    <!--<script src="apps/mashup/~appConfig/route.config.js"></script>-->
+    <!--<script src="apps/mashup/menu.controller.js"></script>-->
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿
+
+<div class="well-sm">
+
+    <style>
+        span.error {
+            color: red;
+        }
+    </style>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>Core session Login</h4>
+        </div>
+        <div class="panel-body">
+            <div class="well">
+
+                <form name="loginForm" novalidate>
+                    <div class="form-group">
+                        <label>User name </label> {{vm.labelUserName}}
+                        <input name="name" class="form-control vp-textbox-input" ng-model="vm.name" required />
+                        <span class="error" ng-show="loginForm.name.$error.required">Please enter a user name</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Application</label>
+                        <label>coreSession</label>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <button ng-click="vm.login();" ng-disabled="loginForm.$invalid" class="btn btn-success vp-menu-btn">Login</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <hr />
+
+</div>

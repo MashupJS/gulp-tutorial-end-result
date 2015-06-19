@@ -1,0 +1,56 @@
+
+
+ # include packages folder and config file but not actual packages
+
+packages/*
+!packages/repositories.config
+
+# !/**/*.csproj
+# !/**/*.config
+# !/**/Properties/*
+# !Mashup.UI.Core/Web.Config
+
+
+# exclude stuff:  bin/obj/node_modules
+Mashup.UI.Core/bin/*
+Mashup.UI.Core/obj/*
+#Mashup.UI.Core/node_modules/*   #removed by default
+
+
+#################
+## Visual Studio
+#################
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# ReSharper is a .NET coding add-in
+_ReSharper*
+
+# Visual Studio profiler
+*.psess
+*.vsp
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+*_i.c
+*_p.c
+*.ilk
+*.meta
+*.obj
+*.pch
+*.pdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.vspscc
+.builds
+*.dotCover

@@ -1,0 +1,115 @@
+
+
+/* ==========================================================================
+   Custom styles - Load last so thse override Bootswatch.
+   ========================================================================== */
+
+
+/* This allows controls to be grouped better.  TODO: Replace this withthe "form-group" method from bootstrap. */
+.vp-label {
+    /* It looks like we don't need this class for labels if we place our controls in <div class="form-group"> */
+    display: block;
+}
+
+/* This gives our text box controls a uniform size and helps with being responsive to a point. */
+.vp-textbox-input {
+    width: 100%;
+    max-width: 240px;
+}
+
+/* Provides a space under a control group.  TODO: Evaluate if this is still needed with the use of "form-group" */
+.vp-element-space {
+    /* Provides a space between control groups allowing them to stack. */
+    height: 10px;
+}
+
+/* Places a subtle border around button controls that might not have a well defined boundary.  Makes the buttons easier to see. */
+.vp-menu-btn {
+    width: 100%;
+    border-color: #485563;
+}
+
+/* Sets the font for text */
+p {
+    font-family: "Verdana";
+}
+/* Sets the font for text */
+body {
+    font-family: "Verdana";
+}
+
+/* Force table elements to align left by default.  This is supposed to be the default behavior
+    according to the bootstrap examples but for some reason it's not.  Possibly being overridden
+    by a css theme somewhere. */
+td { text-align: left; }
+
+
+
+
+/* ==========================================================================
+   Validation styles
+   ========================================================================== */
+/* Sets the style for span.error tags used to give feedback on validation */
+/* This will probably be replaced by a library at some point */
+/*  The .ng-invalid and .ng-valid classes are applied to all FORM elements.*/
+/*  Here you can control the look of these controls to give the application uniformity */
+/*  .ng-invalid {background-color: lightpink;}
+    .ng-valid {background-color: white;}
+     span.error {color: red; font-weight: bold;}*/
+span.error {
+    color: red;
+}
+
+/* ==========================================================================
+   Main Menu styles
+   ========================================================================== */
+
+/* desktop */
+@media (min-width: 1200px) {
+}
+
+/* desktop */
+@media (min-width: 980px) {
+}
+
+/* tablet */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* tablet */
+@media (max-width: 979px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (max-width: 767px) {
+}
+
+
+@media (min-width: 480px) {
+}
+
+/* phone */
+@media (max-width: 480px) {
+}
+
+
+
+
+/* ==========================================================================
+   AngularUI's Bootstrap
+
+    - To correct an incompatibility problem between Twitter Bootstraps CSS and 
+      AngularUI's Bootstrap.
+
+    - From: http://angular-ui.github.io/bootstrap/
+    "Original Bootstrap's CSS depends on empty href attributes to style cursors 
+    for several components (pagination, tabs etc.). But in AngularJS adding empty 
+    href attributes to link tags will cause unwanted route changes. This is why we 
+    need to remove empty href attributes from directive templates and as a result 
+    styling is not applied correctly."
+   ========================================================================== */
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}

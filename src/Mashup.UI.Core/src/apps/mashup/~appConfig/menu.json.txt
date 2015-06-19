@@ -1,0 +1,48 @@
+﻿[
+    {
+        "name": "Applications",
+        "id": "catApps",
+        "isOpen": "true",
+        "icon": " fa-power-off ",
+        "session": "coreSession",
+        "role": "MashupUser",
+        "groups": [
+            {
+                "name": "mashup",
+                "id": "menuItemMashup",
+                "desc": "Starter pages.",
+                "url": "/",
+                "icon": " fa-home ",
+                "session": "coreSession",
+                "role": "MashupUser"
+            }
+        ]
+    },
+    {
+        "name": "Utilities",
+        "id": "catUtilities",
+        "isOpen": "false",
+        "icon": " fa-cogs ",
+        "session": "coreSession",
+        "role": "MashupUser",
+        "groups": [ ]
+    },
+    {
+        "name": "Administrative",
+        "id": "catAdmin",
+        "isOpen": "false",
+        "icon": " fa-users",
+        "session": "coreSession",
+        "role": "MashupUser",
+        "groups": [ ]
+    },
+    {
+        "name": "Examples",
+        "id": "catExamples",
+        "isOpen": "false",
+        "icon": " fa-file-code-o ",
+        "session": "coreSession",
+        "role": "MashupUser",
+        "groups": [ ]
+    }
+]

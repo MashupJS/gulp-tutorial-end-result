@@ -1,0 +1,102 @@
+﻿<style media="screen" type="text/css">
+    @media (max-width: 480px) {
+        #appenv:after {
+            content: "App";
+        }
+
+        #webapienv:after {
+            content: "Api";
+        }
+
+        #dbenv:after {
+            content: "DB";
+        }
+
+        #userInfoHeader:after {
+            content: "User";
+        }
+
+        #connected:after {
+            content: "Conn";
+        }
+
+        #userEmail {
+            font-size: x-small;
+            /*font-size-adjust: .5;*/
+        }
+
+        .aboutGroupsList {
+            width: 190px;
+        }
+    }
+
+    @media (min-width: 480px) {
+        #appenv:after {
+            content: "App Env";
+        }
+
+        #webapienv:after {
+            content: "Web Api Env";
+        }
+
+        #dbenv:after {
+            content: "Database Env";
+        }
+
+        #userInfoHeader:after {
+            content: "User Info";
+        }
+
+        #connected:after {
+            content: "Connected";
+        }
+
+        .aboutGroupsList {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<!-- about.html -->
+<div class=" well-sm text-center">
+    <!--<h3>About</h3>-->
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>About</h4>
+        </div>
+        <div class="panel-body">
+
+            <h4 class="" style="text-align:left">User Sessions</h4>
+            <tabset >
+                <tab ng-repeat="session in vm.sessions" heading="{{session.appName}}"><pre>{{session}}</pre></tab>
+            </tabset>
+
+            <hr />
+
+
+            <h4 class="" style="text-align:left">Session Cache</h4>
+
+            <table class="table table-striped table-bordered table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th ng-repeat="(header, value) in vm.sessionCache[0]">
+                            {{header}}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.sessionCache">
+                        <td ng-repeat="cell in item">
+                            {{cell}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+
+    </div>
+</div>
