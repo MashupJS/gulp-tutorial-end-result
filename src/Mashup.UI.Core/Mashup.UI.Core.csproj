@@ -58,9 +58,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Gruntfile.js" />
-    <Content Include=".jshintrc" />
-    <None Include="Gruntfile.js.old" />
     <Content Include="gulpfile.js" />
     <Content Include="jshint-output.html" />
     <Content Include="package.json" />
@@ -128,7 +125,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="QuickStart.txt" />
     <None Include="Scripts\_references.js" />
     <Content Include="src\apps\app1\page1\page1.controller.js" />
     <Content Include="src\apps\app1\page1\page1.html" />
@@ -615,7 +611,6 @@
     <Content Include="src\core\lib\ynd-db\ydn.db-isw-sql-e-cur-qry-dev_devBuild.js" />
     <Content Include="src\index.controller.js" />
     <Content Include="src\index.html" />
-    <None Include="tslint.json" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
