@@ -22,6 +22,10 @@ var gulp = require('gulp')
     , jshint                = require('gulp-jshint')
     , stylish               = require('jshint-stylish')
     , jshinthtmlreporter    = require('gulp-jshint-html-reporter')
+    , ts                    = require('gulp-typescript')
+    , tslint                = require('gulp-tslint')
+    , tsstylish             = require('gulp-tslint-stylish')
+    , sass                  = require('gulp-sass')
 
 ;
 
@@ -154,6 +158,43 @@ gulp.task('jshint', function () {
 });
 
 
+gulp.task('tscompile', function () {
+    return gulp.src(['./dist/**/*.ts', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'])
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+    .pipe(sourcemaps.init())
+    .pipe(ts({
+        target: 'ES5',
+        declarationFiles: false,
+        noExternalResolve: true
+    }))
+    .pipe(rename({ extname: '.js' }))
+    .pipe(gulp.dest('dist/./'));
+});
+
+
+gulp.task('tslint', function () {
+    return gulp.src(['./dist/**/*.ts', '!dist/core/lib/**/*.*', '!dist/core/css/**/*.*'])
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(tslint())
+        .pipe(tslint.report('verbose', {
+            emitError: false,
+            sort: true,
+            bell: true
+        }));
+});
+
+gulp.task('sass', function () {
+    gulp.src('./dist/**/*.scss', { base: 'dist/./' })
+      .pipe(plumber({
+          errorHandler: onError
+      }))
+        .pipe(sass())
+        .pipe(gulp.dest('dist/./'));
+});
 
 
 // ----------------------------------------------------------------
@@ -162,6 +203,6 @@ gulp.task('jshint', function () {
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
                 ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'
-                    , 'grunt-merge-json:menu', 'jshint'],
+                    , 'grunt-merge-json:menu', 'jshint', 'tscompile', 'tslint', 'sass'],
                 ['uglifyalljs', 'minifycss']);
 });
