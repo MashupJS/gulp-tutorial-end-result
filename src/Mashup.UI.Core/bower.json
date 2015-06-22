@@ -1,0 +1,19 @@
+{
+  "name": "mashupjs",
+  "version": "0.0.0",
+  "main": "dist/index.html",
+  "license": "MIT",
+  "homepage": "dist/index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "normalize.css": "~3.0.3",
+    "fontawesome": "~4.3.0"
+  }
+}
