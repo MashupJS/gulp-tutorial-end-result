@@ -75,12 +75,14 @@ gulp.task('routeconfig', function () {
 });
 
 gulp.task('libs', function () {
-    return gulp.src(['bower_components/**/*.js'])
+    return gulp.src(['bower_components/bootstrap/dist/js/bootstrap.min.js'
+                    , 'bower_components/normalize.css/normalize.css'
+                    , 'bower_components/**//fontawesome/css/font-awesome.min.css', 'bower_components/**/fontawesome/fonts/*.*', 'bower_components/**/fontawesome/**/*.*'])
       .pipe(plumber({
           errorHandler: onError
       }))
-      .pipe(concat('libs.js'))
-      .pipe(gulp.dest('dist/core/lib/'));
+      //.pipe(concat('libs.js'))
+      .pipe(gulp.dest('dist/core/lib/bower/./'));
 });
 
 gulp.task('uglifyalljs', function () {

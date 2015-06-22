@@ -120,6 +120,7 @@
     <Content Include="Gruntfile.js" />
     <Content Include=".jshintrc" />
     <Content Include="tslint.json" />
+    <Content Include="bower.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
