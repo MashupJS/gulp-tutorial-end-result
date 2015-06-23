@@ -27,17 +27,15 @@
     </style>
     <!-- Normalize, below, is described here: -->
     <!-- http://getbootstrap.com/css/#overview-normalize and http://necolas.github.io/normalize.css/ -->
-    <link href="core/lib/bower/normalize.css" rel="stylesheet" />
-    <!--<link href="core/lib/bower/fontawesome/css/font-awesome.min.css" rel="stylesheet" />-->
-    <link href="core/lib/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="core/lib/bower/normalize.css/normalize.css" rel="stylesheet" />
+    <link href="core/lib/bower/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!--<link href="core/lib/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />-->
 
-    <!--<link href="core/css/bootstrap/yeti/bootstrap.min.css" rel="stylesheet" />-->
     <link href="core/css/bootstrap/yeti/bootstrap.min.css" rel="stylesheet" />
     <!--<link href="css/bootstrap/cerulean/bootstrap.min.css" rel="stylesheet" />-->
     <!-- Use for custom or overriding css.  This must be the last css loaded to work. -->
     <link href="core/css/main.min.css" rel="stylesheet" />
 
-    <script src="core/lib/modernizr/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 </head>
 <!--<body ng-controller="mashupController">-->
 <body ng-controller="indexController">
@@ -86,17 +84,17 @@
     </div> <!-- /container -->
     <!--<script>window.jQuery || document.write('<script src="lib/jquery/jquery-1.11.0.min.js"><\/script>')</script>-->
 
-    <script src="core/lib/jquery/jquery-2.1.1.min.js"></script>
+    <script src="core/lib/bower/jquery/dist/jquery.min.js"></script>
     <!-- I commented out the bootstrap, below, thinking I didn't need it.  Then things stopped working. -->
 
-    <script src="core/lib/bootstrap/bootstrap-3.3.0-dist/js/bootstrap.min.js"></script>
-    <script src="core/lib/angularJS/1.3.8/angular.min.js"></script>
-    <script src="core/lib/angularJS/1.3.8/angular-route.min.js"></script>
-    <script src="core/lib/angularJS/1.3.8/angular-sanitize.min.js"></script>
-    <script src="core/lib/angular-ui/ui-bootstrap-tpls.min.js"></script>
+    <script src="core/lib/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="core/lib/bower/angular/angular.min.js"></script>
+    <script src="core/lib/bower/angular-route/angular-route.min.js"></script>
+    <script src="core/lib/bower/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="core/lib/bower/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="core/lib/ynd-db/1.1.1/ydn.db-is-sql-e-cur-qry-text-dev.js"></script>
-    <script src="core/lib/lodash/2.4.1/lodash.min.js"></script>
-    <!--<script src="lib/ocLazyLoad/ocLazyLoad.js"></script>-->
+    <script src="core/lib/bower/lodash/lodash.min.js"></script>
     <script src="core/lib/ocLazyLoad/0.5.2.20150120/ocLazyLoad.min.js"></script>
 
     <!--Application Controllers-->
@@ -107,15 +105,8 @@
     <!--Application Router Files-->
     <script src="route.config.min.js"></script>
 
-    <!--Used by the router to authenticate so needs loaded now, now on demand.-->
-    <!--This can be replace with your own AuthN code-->
-    <!--<script src="apps/mashup/~appServices/data.service.min.js"></script>-->
-    <!-- Services -->
     <script src="core.services.min.js"></script>
 
-
-    <!--<script src="apps/mashup/~appConfig/route.config.js"></script>-->
-    <!--<script src="apps/mashup/menu.controller.js"></script>-->
 
 </body>
 </html>

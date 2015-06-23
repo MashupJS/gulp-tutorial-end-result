@@ -75,9 +75,16 @@ gulp.task('routeconfig', function () {
 });
 
 gulp.task('libs', function () {
-    return gulp.src(['bower_components/bootstrap/dist/js/bootstrap.min.js'
-                    , 'bower_components/normalize.css/normalize.css'
-                    , 'bower_components/**//fontawesome/css/font-awesome.min.css', 'bower_components/**/fontawesome/fonts/*.*', 'bower_components/**/fontawesome/**/*.*'])
+    return gulp.src(['bower_components/**//bootstrap/dist/js/bootstrap.min.js'
+                    , 'bower_components/**//normalize.css/normalize.css'
+                    , 'bower_components/**//fontawesome/css/font-awesome.min.css'
+                    , 'bower_components/**/fontawesome/fonts/*.*'
+                    , 'bower_components/**//jquery/dist/jquery.min.js'
+                    , 'bower_components/**//angular/*.min.js'
+                    , 'bower_components/**//angular-route/angular-route.min.js'
+                    , 'bower_components/**//angular-sanitize/angular-sanitize.min.js'
+                    , 'bower_components/**//angular-bootstrap/ui-bootstrap-tpls.min.js'
+                    , 'bower_components/**//lodash/lodash.min.js'])
       .pipe(plumber({
           errorHandler: onError
       }))
