@@ -276,4 +276,6 @@ gulp.task('watch', function () {
 
     gulp.watch(['dist/**/*.js', '!dist/core/lib/**/*.*', '!dist/**/*.min.js', '!dist/core/css/**/*.*'], ['jshint']);
 
+    gulp.watch(['dist/**/*.html', '!dist/**/*.min.html', '!dist/core/lib/**/*'], ['minifyhtml']);
+
 });
