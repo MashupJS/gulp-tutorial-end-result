@@ -222,10 +222,12 @@ mashupApp.service('cacheService', ['$http', '$q', '$log', 'utility', 'detectServ
                  return deferred.promise;
 
              },
-             getData: function (cacheName, schema, webApiUrl, staleMinutes,
+             getData: function (cacheName, schema, options, staleMinutes,
                  useHeartBeatConvention, heartBeatUrl, heartBeatName) {
 
                  var deferred = $q.defer();
+
+                 var webApiUrl = options.url;
 
                  heartBeatUrl = getHeartBeatUrl(webApiUrl, useHeartBeatConvention, heartBeatUrl);
 
@@ -242,7 +244,30 @@ mashupApp.service('cacheService', ['$http', '$q', '$log', 'utility', 'detectServ
 
                      if (cacheIsStale && webApiAvailable) {
                          // cache has become stale so retrieving fresh data.
-                         $http.get(webApiUrl, { withCredentials: true })
+                         // -------------------
+                         // Example of options
+                         // -------------------
+                         //var options = {
+                         //    url: 'http://localhost:50004/api/ExampleData/Items/Search2/',
+                         //    method: 'POST',
+                         //    data: JSON.stringify(myData),
+                         //    withCredentials: true,
+                         //    contentType: 'application/json'
+                         //}
+                         // -------------------
+                         // Example of options.params
+                         // -------------------
+                         //var params = {
+                         //    id: vm.id,
+                         //    action: vm.action,
+                         //    completed: vm.completed,
+                         //    myDecimal: vm.myDecimal,
+                         //    myDouble: vm.myDouble,
+                         //    myLong: vm.myLong,
+                         //    contact: vm.contact,
+                         //    doneWithIndeterminate: vm.doneCheckedState
+                         //};
+                         $http(options)
                              .success(function (data) {
 
                                  //#region
