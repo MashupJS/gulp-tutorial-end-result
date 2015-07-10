@@ -310,7 +310,7 @@
     <Content Include="src\apps\mashup\welcome.html" />
     <Content Include="src\apps\mashup\~appConfig\menu.json.txt" />
     <Content Include="src\apps\mashup\~appConfig\route.config.js" />
-    <Content Include="src\core\app.js" />
+    <Content Include="src\app.js" />
     <Content Include="src\core\common\data\data.service.js" />
     <Content Include="src\core\common\directives\New Text Document.txt" />
     <Content Include="src\core\common\filters\New Text Document.txt" />
