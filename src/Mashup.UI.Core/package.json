@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "fs": "0.0.2",
     "grunt": "^0.4.5",
     "grunt-merge-json": "^0.9.5",
     "gulp": "^3.9.0",
@@ -24,6 +25,7 @@
     "gulp-ng-annotate": "^1.0.0",
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-replace-task": "^0.2.1",
     "gulp-sass": "^2.0.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-tslint": "^3.0.2-beta",
@@ -33,6 +35,7 @@
     "gulp-watch": "^4.2.4",
     "imagemin-pngquant": "^4.1.0",
     "jshint-stylish": "^2.0.0",
-    "run-sequence": "^1.1.1"
+    "run-sequence": "^1.1.1",
+    "yargs": "^3.15.0"
   }
 }

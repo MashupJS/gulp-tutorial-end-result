@@ -28,31 +28,11 @@ mashupApp.config(['$sceProvider', function ($sceProvider) {
 }]);
 
 
-// add authentication here...
-// http://brewhouse.io/blog/2014/12/09/authentication-made-simple-in-single-page-angularjs-applications.html
-//mashupApp.run(['$rootScope', '$state', 'loginModal', function ($rootScope, $state, loginModal) {
-//mashupApp.run(['$rootScope', '$state', function ($rootScope, $state) {
-
-//    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
-
-//        window.windowalert(toState);
-
-//        //var requireLogin = toState.data.requireLogin;
-
-//        //if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
-//        //    event.preventDefault();
-
-//        //    loginModal()
-//        //      .then(function () {
-//        //          return $state.go(toState.name, toParams);
-//        //      })
-//        //      .catch(function () {
-//        //          return $state.go('welcome');
-//        //      });
-//        //}
-
-//    });
-//}]);
+// ---------------------------------------------------------------------------------------------
+// Application Constants
+// ---------------------------------------------------------------------------------------------
+mashupApp.constant('apiUrl', { 'myFirstApi': '@@myFirstApi' },
+                             { 'mySecondApi': '@@mySecondApi' });
 
 
 

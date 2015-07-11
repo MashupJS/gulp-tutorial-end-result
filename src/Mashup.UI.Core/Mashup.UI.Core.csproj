@@ -275,6 +275,10 @@
     <Content Include=".jshintrc" />
     <Content Include="tslint.json" />
     <Content Include="bower.json" />
+    <Content Include="src\env.config.localdev.json" />
+    <Content Include="src\env.config.dev.json" />
+    <Content Include="src\env.config.stage.json" />
+    <Content Include="src\env.config.prod.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

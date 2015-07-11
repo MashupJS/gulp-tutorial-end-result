@@ -3,28 +3,32 @@ var onError = function (err) {
 };
 
 var gulp = require('gulp')
-    , uglify                = require('gulp-uglify')
-    , rename                = require('gulp-rename')
-    , sourcemaps            = require('gulp-sourcemaps')
-    , runSequence           = require('run-sequence')
-    , plumber               = require('gulp-plumber')
-    , ngAnnotate            = require('gulp-ng-annotate')
-    , clean                 = require('gulp-clean')
-    , newer                 = require('gulp-newer')
-    , concat                = require('gulp-concat')
-    , rename                = require('gulp-rename')
-    , minifycss             = require('gulp-minify-css')
-    , minifyhtml            = require('gulp-minify-html')
-    , imagemin              = require('gulp-imagemin')
-    , pngquant              = require('imagemin-pngquant')
-    , jshint                = require('gulp-jshint')
-    , stylish               = require('jshint-stylish')
-    , jshinthtmlreporter    = require('gulp-jshint-html-reporter')
-    , ts                    = require('gulp-typescript')
-    , tslint                = require('gulp-tslint')
-    , tsstylish             = require('gulp-tslint-stylish')
-    , sass                  = require('gulp-sass')
-    , watch                 = require('gulp-watch')
+    , uglify = require('gulp-uglify')
+    , rename = require('gulp-rename')
+    , sourcemaps = require('gulp-sourcemaps')
+    , runSequence = require('run-sequence')
+    , plumber = require('gulp-plumber')
+    , ngAnnotate = require('gulp-ng-annotate')
+    , clean = require('gulp-clean')
+    , newer = require('gulp-newer')
+    , concat = require('gulp-concat')
+    , rename = require('gulp-rename')
+    , minifycss = require('gulp-minify-css')
+    , minifyhtml = require('gulp-minify-html')
+    , imagemin = require('gulp-imagemin')
+    , pngquant = require('imagemin-pngquant')
+    , jshint = require('gulp-jshint')
+    , stylish = require('jshint-stylish')
+    , jshinthtmlreporter = require('gulp-jshint-html-reporter')
+    , ts = require('gulp-typescript')
+    , tslint = require('gulp-tslint')
+    , tsstylish = require('gulp-tslint-stylish')
+    , sass = require('gulp-sass')
+    , watch = require('gulp-watch')
+    , replace = require('gulp-replace-task')
+    , args = require('yargs').argv
+    , fs = require('fs')
+
 
 ;
 
@@ -50,7 +54,7 @@ gulp.task('copy', function () {
       .pipe(plumber({
           errorHandler: onError
       }))
-    .pipe(newer('dist')) 
+    .pipe(newer('dist'))
     .pipe(gulp.dest('dist'));
 });
 
@@ -215,6 +219,38 @@ gulp.task('watch:annotate', function () {
 });
 
 
+// ---------------------------------------------------------------
+// Set environment constants
+// ---------------------------------------------------------------
+gulp.task('setEnv', function () {
+    // Get the environment from the command line
+    var env = args.env || 'localdev';
+
+    // Read the settings from the right file
+    var filename = 'env.config.' + env + '.json';
+    var settings = JSON.parse(fs.readFileSync('dist/' + filename, 'utf8'));
+
+    // Replace each placeholder with the correct value for the variable.  
+    gulp.src('src/app.js')
+      .pipe(replace({
+          patterns: [
+            {
+                match: 'myFirstApi',
+                replacement: settings.myFirstApi
+            },
+            {
+                match: 'mySecondApi',
+                replacement: settings.mySecondApi
+            },
+          ]
+      }))
+      .pipe(gulp.dest('dist/./'));
+});
+
+
+
+
+
 
 // ----------------------------------------------------------------
 // Default Task
@@ -222,9 +258,10 @@ gulp.task('watch:annotate', function () {
 gulp.task('default', function () {
     runSequence('annotate', 'clean-dist', 'copy',
                 ['coreservices', 'routeconfig', 'libs', 'minifyhtml', 'minifyimage'
-                    , 'grunt-merge-json:menu', 'jshint', 'tscompile', 'tslint', 'sass']
+                    , 'grunt-merge-json:menu', 'jshint', 'tscompile', 'tslint', 'sass'
+                    , 'setEnv']
                 , ['uglifyalljs', 'minifycss']
-                ,'watch');
+                , 'watch');
 });
 
 
