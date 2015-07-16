@@ -153,49 +153,7 @@ mashupApp.service('cacheService', ['$http', '$q', '$log', 'utility', 'detectServ
                  updateCacheAge('mashCacheStart');
              }
          });
-         // --------------------------------------------------------------------------------
-         // --------------------------------------------------------------------------------
-         // --------------------------------------------------------------------------------
 
-         var getHeartBeatUrl = function (webApiUrl, useHeartBeatConvention, heartBeatUrl) {
-             var result = '';
-
-             if (useHeartBeatConvention === true) {
-                 result = getHeartBeatUrlByConvention(webApiUrl);
-                 return result;
-             } else {
-                 if (!heartBeatUrl) {
-                     var logObject = utility.getLogObject('No heartBeatUrl provided', 'Mashup.UI.Core',
-                         'cacheService', 'getHeartBeatUrl', 'return blank', sessionService);
-                     $log.warn('useHeartBeatConvention was falsy but no heartBeatUrl provided.', logObject);
-                 }
-
-                 // regcheck for valid URL
-                 // if url is not a valid URL then return '' and log warning.
-                 // else return the heartBeatUrl as is.
-                 return heartBeatUrl;
-             }
-
-             return result;
-         };
-
-         var getHeartBeatUrlByConvention = function (webApiUrl) {
-             var result = '';
-
-             // This is not a configurable convention.  This convintion simply adds "api/HearBeat/" to the end of a URL.
-
-             // http://www.sitename.com/article/2009/09/14/this-is-an-article/
-             // http://stackoverflow.com/questions/1420881/javascript-jquery-method-to-find-base-url-from-a-string
-
-             /*jshint ignore:start */
-             var parseUrl = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
-             /*jshint ignore:end */
-
-             var parts = parseUrl.exec(webApiUrl);
-             result = parts[1] + ':' + parts[2] + parts[3] + ':' + parts[4] + '/api/HeartBeat/';
-
-             return result;
-         };
 
          return {
 
@@ -223,24 +181,27 @@ mashupApp.service('cacheService', ['$http', '$q', '$log', 'utility', 'detectServ
 
              },
              getData: function (cacheName, schema, options, staleMinutes,
-                 useHeartBeatConvention, heartBeatUrl, heartBeatName) {
+                 heartBeatOptions) {
 
                  var deferred = $q.defer();
 
                  var webApiUrl = options.url;
-
-                 heartBeatUrl = getHeartBeatUrl(webApiUrl, useHeartBeatConvention, heartBeatUrl);
-
+                 
                  // Check if the cache is stale.
                  isCacheStale(cacheName, staleMinutes).then(function (cacheIsStale) {
                      // If cache stale then get new data.
 
                      // if no application name is provided for the detect service to use then the url is used.
                      // this is mostly used for logging purposes.
-                     heartBeatName = heartBeatName || heartBeatUrl;
-                     heartBeatName = heartBeatName || webApiUrl;
+                     if (!heartBeatOptions.heartBeatName) {
+                         heartBeatOptions.heartBeatName = heartBeatOptions.heartBeatName || webApiUrl;
+                     }
+                     else {
+                         heartBeatOptions.heartBeatName = heartBeatOptions.heartBeatName || heartBeatOptions.heartBeatUrl;
+                     }
 
-                     var webApiAvailable = detectService.detect(heartBeatUrl, heartBeatName);
+
+                     var webApiAvailable = detectService.detect(heartBeatOptions.heartBeatUrl, heartBeatOptions.heartBeatName);
 
                      if (cacheIsStale && webApiAvailable) {
                          // cache has become stale so retrieving fresh data.
@@ -313,7 +274,7 @@ mashupApp.service('cacheService', ['$http', '$q', '$log', 'utility', 'detectServ
                              // if the call fails then return the current cache.
                              // TODO: make an async call to let someone know a service failed?
                              // alert('Web Api Error');
-                             detectService.failed(heartBeatUrl, heartBeatName);
+                             detectService.failed(heartBeatOptions.heartBeatUrl, heartBeatOptions.heartBeatName);
                              getCache(cacheName).then(function (data) {
                                  // async alert()
                                  // setTimeout(function () { alert('cache data'); }, 1);
